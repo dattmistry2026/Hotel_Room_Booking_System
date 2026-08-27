@@ -1,47 +1,49 @@
-const Task = require('../models/Task');
-const getTasks = async (req, res) => {
+const Room = require('../models/Room');
+
+const getRooms = async (req, res) => {
     try {
-        const tasks = await Task.find({ userId: req.user.id });
-        res.json(tasks);
+        const rooms = await Room.find();
+        res.json(rooms);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-const addTask = async (req,res) => {
-    const { title, description, deadline } = req.body;
+const addRoom = async (req, res) => {
+    const { roomNumber, type, pricePerNight, isAvailable } = req.body;
     try {
-        const task = await Task.create({ userId: req.user.id, title, description, deadline });
-        res.status(201).json(task);
+        const room = await Room.create({ roomNumber, type, pricePerNight, isAvailable });
+        res.status(201).json(room);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-const updateTask = async (req,res) => {
-    const { title, description, completed, deadline } = req.body;
+const updateRoom = async (req, res) => {
+    const { roomNumber, type, pricePerNight, isAvailable } = req.body;
     try {
-        const task = await Task.findById(req.params.id);
-        if (!task) return res.status(404).json({ message: 'Task not found' });
-        task.title = title || task.title;
-        task.description = description || task.description;
-        task.completed = completed ?? task.completed;
-        task.deadline = deadline || task.deadline;
-        const updatedTask = await task.save();
-        res.json(updatedTask);
+        const room = await Room.findById(req.params.id);
+        if (!room) return res.status(404).json({ message: 'Room not found' });
+        room.roomNumber = roomNumber || room.roomNumber;
+        room.type = type || room.type;
+        room.pricePerNight = pricePerNight || room.pricePerNight;
+        room.isAvailable = isAvailable ?? room.isAvailable;
+        const updatedRoom = await room.save();
+        res.json(updatedRoom);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-const deleteTask = async (req, res) => {
+const deleteRoom = async (req, res) => {
     try {
-        const task = await Task.findById(req.params.id);
-        if (!task) return res.status(404).json({ message: 'Task not found' });
-        await task.remove();
-        res.json({ message: 'Task deleted' });
+        const room = await Room.findById(req.params.id);
+        if (!room) return res.status(404).json({ message: 'Room not found' });
+        await room.deleteOne();
+        res.json({ message: 'Room deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
-module.exports = { getTasks, addTask, updateTask, deleteTask };
+
+module.exports = { getRooms, addRoom, updateRoom, deleteRoom };
