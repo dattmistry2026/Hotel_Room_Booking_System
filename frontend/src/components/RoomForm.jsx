@@ -40,31 +40,63 @@ const RoomForm = ({ rooms, setRooms, editingRoom, setEditingRoom }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded mb-6">
-      <h1 className="text-2xl font-bold mb-4">{editingRoom ? 'Edit Room' : 'Add Room'}</h1>
-      <input
-        type="text"
-        placeholder="Room Number"
-        value={formData.roomNumber}
-        onChange={(e) => setFormData({ ...formData, roomNumber: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
-      />
-      <input
-        type="text"
-        placeholder="Room Type (e.g. Single, Double, Suite)"
-        value={formData.type}
-        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
-      />
-      <input
-        type="number"
-        placeholder="Price per Night"
-        value={formData.pricePerNight}
-        onChange={(e) => setFormData({ ...formData, pricePerNight: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
-      />
-      <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingRoom ? 'Update Room' : 'Add Room'}
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-xl2 border border-navy-800/8 bg-white p-6 shadow-card mb-10"
+    >
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <p className="eyebrow">{editingRoom ? 'Editing' : 'New listing'}</p>
+          <h2 className="font-display text-xl font-semibold text-navy-800">
+            {editingRoom ? 'Edit room' : 'Add a room'}
+          </h2>
+        </div>
+        {editingRoom && (
+          <button
+            type="button"
+            onClick={() => setEditingRoom(null)}
+            className="text-sm font-medium text-ink/50 hover:text-navy-800"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div>
+          <label className="field-label">Room number</label>
+          <input
+            type="text"
+            placeholder="e.g. 214"
+            value={formData.roomNumber}
+            onChange={(e) => setFormData({ ...formData, roomNumber: e.target.value })}
+            className="field-input"
+          />
+        </div>
+        <div>
+          <label className="field-label">Room type</label>
+          <input
+            type="text"
+            placeholder="Single, Double, Suite"
+            value={formData.type}
+            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            className="field-input"
+          />
+        </div>
+        <div>
+          <label className="field-label">Price per night</label>
+          <input
+            type="number"
+            placeholder="180"
+            value={formData.pricePerNight}
+            onChange={(e) => setFormData({ ...formData, pricePerNight: e.target.value })}
+            className="field-input"
+          />
+        </div>
+      </div>
+
+      <button type="submit" className="btn-primary mt-5">
+        {editingRoom ? 'Update room' : 'Add room'}
       </button>
     </form>
   );

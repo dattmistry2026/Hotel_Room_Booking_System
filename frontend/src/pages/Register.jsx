@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
 const Register = () => {
@@ -18,33 +18,56 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20">
-      <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded">
-        <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
-        <input
-          type="text"
-          placeholder="Name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">
-          Register
+    <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-cream px-6 py-16">
+      <form onSubmit={handleSubmit} className="auth-card">
+        <p className="eyebrow text-center">Join us</p>
+        <h1 className="mt-1 text-center font-display text-2xl font-semibold text-navy-800">
+          Create your account
+        </h1>
+
+        <div className="mt-6 space-y-4">
+          <div>
+            <label className="field-label">Name</label>
+            <input
+              type="text"
+              placeholder="Jane Doe"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="field-input"
+            />
+          </div>
+          <div>
+            <label className="field-label">Email</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="field-input"
+            />
+          </div>
+          <div>
+            <label className="field-label">Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              className="field-input"
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="btn-primary mt-6 w-full">
+          Create account
         </button>
+
+        <p className="mt-5 text-center text-sm text-ink/60">
+          Already have an account?{' '}
+          <Link to="/login" className="font-medium text-navy-800 hover:text-gold-600">
+            Sign in
+          </Link>
+        </p>
       </form>
     </div>
   );
