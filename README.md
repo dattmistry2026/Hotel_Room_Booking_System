@@ -38,7 +38,7 @@ edit, delete) with pricing and availability.
 
 1. **Clone the repository**
 ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/dattmistry2026/Hotel_Room_Booking_System.git
    cd Hotel_Room_Booking_System
 ```
 
