@@ -1,3 +1,5 @@
+Name - Datt Rashmin Mistry 
+
 # Havenstay — Hotel Room Booking System
 
 A full-stack MERN application for managing a hotel's room inventory. Users can
